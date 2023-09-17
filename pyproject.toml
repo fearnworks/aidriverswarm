@@ -1,0 +1,29 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = [
+  "setuptools>=68.0",
+  "setuptools-scm",
+  "pytest",
+]
+
+[project]
+description = "AIDriverSwarm"
+name = "aidriverswarm"
+version = "0.1"
+dynamic = ["dependencies", "optional-dependencies"]
+
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements/requirements.in"] }
+optional-dependencies.test = { file = ["requirements/requirements-test.in"] }
+optional-dependencies.server = { file = ["requirements/requirements-server.in"] }
+optional-dependencies.dev = { file = ["requirements/requirements-dev.in"]}
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "modules", "webui"
+]
+
+[tool.setuptools.packages.find]
+include = ["modules", "webui", "config"]  # package names should match these glob patterns (["*"] by default)
+exclude = []  # exclude packages matching these glob patterns (empty by default)
